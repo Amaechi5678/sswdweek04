@@ -12,6 +12,7 @@ $port = 3307;
 //This is particularly important where there is a timestamp indicating when something happened.
 date_default_timezone_set('Europe/Dublin');
 
+
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection
@@ -19,7 +20,11 @@ if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "INSERT INTO member (firstname, surname) VALUES ('john', 'doe')";
+$first_name = mysqli_real_escape_string($conn, $_POST['firstName']);
+$last_name = mysqli_real_escape_string($conn, $_POST['lastName']);
+
+
+$sql = "INSERT INTO member (firstname, surname) VALUES ('$first_name' , '$last_name')";
 
 mysqli_query($conn, $sql);
 
